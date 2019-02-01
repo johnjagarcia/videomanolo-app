@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>VideoManolo WEB</title>
+</h:head>
+
+<h:body>
+	<h:form id="clientes-form">
+
+		<p:panel header="Registro de clientes">
+			<h:panelGrid columns="2" cellpadding="4">
+				<h:outputText value="RUT*: " />
+				<p:inputText id="rut" value="#{clientesView.cliente.rut}" />
+
+				<h:outputText value="Nombres*: " />
+				<p:inputText id="nombre" value="#{clientesView.cliente.nombre}" />
+
+				<h:outputText value="Dirección: " />
+				<p:inputText id="direccion"
+					value="#{clientesView.cliente.direccion}" />
+
+				<h:outputText value="Telefono: " />
+				<p:inputText id="telefono" value="#{clientesView.cliente.telefono}" />
+
+				<p:commandButton value="Reservar" id="reservar"
+					update="clientes-form" actionListener="#{clientesView.submit}" />
+
+				<p:commandButton value="Reset" id="reset" update="clientes-form"
+					actionListener="#{formController.reset}" />
+			</h:panelGrid>
+		</p:panel>
+
+		<p:dataTable var="cliente" value="#{clientesView.clientes}">
+			<p:column headerText="Id">
+				<h:outputText value="#{cliente.id}" />
+			</p:column>
+			
+			<p:column headerText="RUT">
+				<h:outputText value="#{cliente.rut}" />
+			</p:column>
+
+			<p:column headerText="Nombres">
+				<h:outputText value="#{cliente.nombre}" />
+			</p:column>
+
+			<p:column headerText="Dirección">
+				<h:outputText value="#{cliente.direccion}" />
+			</p:column>
+
+			<p:column headerText="Telefono	">
+				<h:outputText value="#{cliente.telefono}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

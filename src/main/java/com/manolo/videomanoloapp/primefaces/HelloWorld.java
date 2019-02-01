@@ -27,4 +27,8 @@ public class HelloWorld {
 	public String showGreeting() {
 		return "Hello " + firstName + " " + lastName + "!";
 	}
+	
+	public String execute() {
+		return "peliculas.xhtml?faces-redirect=true";
+	}
 }

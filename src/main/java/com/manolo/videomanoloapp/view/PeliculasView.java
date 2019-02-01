@@ -28,6 +28,10 @@ public class PeliculasView implements Serializable {
 	public void init() {
 		peliculas = peliculaRepository.findAll();
 	}
+	
+	public String reservar() {
+		return "reserva.xhtml?faces-redirect=true";
+	}
 
 	public List<Pelicula> getPeliculas() {
 		return peliculas;

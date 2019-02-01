@@ -21,6 +21,9 @@
 
 				<p:commandButton id="submit" value="Submit" update="greeting-panel"
 					oncomplete="PF('greetingDialog').show()" />
+
+				<p:commandButton value="hola" action="#{helloWorld.execute}"
+					ajax="false" />
 			</h:panelGrid>
 		</p:panel>
 
