@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>VideoManolo WEB</title>
+</h:head>
+
+<h:body>
+	<h:form id="form">
+		<p:dataGrid var="pelicula" value="#{peliculasView.peliculas}"
+			columns="3" layout="grid" rows="5" paginator="true" id="peliculas"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5, 10, 20">
+
+			<f:facet name="header">Peliculas disponibles</f:facet>
+
+			<p:panel header="#{pelicula.id}" style="text-align:center">
+				<h:panelGrid columns="1" style="width:100%">
+					<h:outputText value="#{pelicula.titulo}"
+						style="font-size: 32px;font-weight: bold;" />
+
+					<h:outputText value="#{pelicula.descripcion}"
+						style="font-size: 14px" />
+					<p:separator></p:separator>
+
+					<h:outputText value="Disponibles: #{pelicula.cantidad}"
+						style="font-size: 16px" />
+
+					<p:spacer />
+
+					<p:commandButton update=":form:peliculaDetail"
+						oncomplete="PF('peliculaDialog').show()" title="Ver detalles">
+						<f:setPropertyActionListener value="#{pelicula}"
+							target="#{peliculasView.selectedPelicula}" />
+					</p:commandButton>
+				</h:panelGrid>
+			</p:panel>
+
+		</p:dataGrid>
+
+		<p:dialog header="Información de la pelicula"
+			widgetVar="peliculaDialog" modal="true" showEffect="fade"
+			hideEffect="fade" resizable="false" style="text-align:center;">
+			<p:outputPanel id="peliculaDetail" style="text-align:center;">
+				<p:panelGrid columns="2"
+					rendered="#{not empty peliculasView.selectedPelicula}"
+					columnClasses="label,value">
+
+					<h:outputText value="Titulo" />
+					<h:outputText value="#{peliculasView.selectedPelicula.titulo}" />
+
+					<h:outputText value="Descripción" />
+					<h:outputText value="#{peliculasView.selectedPelicula.descripcion}" />
+
+					<h:outputText value="Actores:" />
+					<h:outputText value="#{peliculasView.selectedPelicula.actores}" />
+
+					<h:outputText value="Director" />
+					<h:outputText value="#{peliculasView.selectedPelicula.director}" />
+				</p:panelGrid>
+
+				<p:spacer />
+
+			</p:outputPanel>
+
+			<h:commandButton action="#{peliculasView.successs}" value="Reservar">
+				<f:param name="id_pelicula"
+					value="#{peliculasView.selectedPelicula.id}" />
+			</h:commandButton>
+		</p:dialog>
+	</h:form>
+
+</h:body>
+</html>
