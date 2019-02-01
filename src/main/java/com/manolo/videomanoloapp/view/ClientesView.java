@@ -1,5 +1,6 @@
 package com.manolo.videomanoloapp.view;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -33,22 +34,45 @@ public class ClientesView implements Serializable {
 	}
 
 	public void submit() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+
 		if (cliente.getRut() != null && cliente.getNombre() != null) {
 
-			Cliente clienteGuardado = clientesRepository.save(cliente);
-			if (clienteGuardado != null) {
-				System.out.println("Usuario guardado correctamente");
-				init();
+			Cliente clienteRegistrado = clientesRepository.findByRut(cliente.getRut());
+
+			if (clienteRegistrado != null) {
+				context.addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_WARN, "Info.", "El cliente ya existe!."));
+			} else {
+				Cliente clienteGuardado = clientesRepository.save(cliente);
+				if (clienteGuardado != null) {
+					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info.",
+							"Cliente registrado correctamente!."));
+					init();
+
+					try {
+						FacesContext.getCurrentInstance().getExternalContext()
+								.redirect("peliculas.xhtml?faces-redirect=true");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning", "Hay campos que obligatorios."));
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Info.", "Debe rellenar los campos obligatorios!"));
 		}
 
 	}
 
 	public void reset() {
-		cliente = new Cliente();
+		init();
+	}
+
+	public String home() {
+		init();
+		return "peliculas.xhtml?faces-redirect=true";
 	}
 
 	public List<Cliente> getClientes() {

@@ -8,4 +8,14 @@
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver
 		</el-resolver>
 	</application>
+
+	<navigation-rule>
+		<from-view-id>/peliculas.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{peliculas.successs}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/reserva.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>

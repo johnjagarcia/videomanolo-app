@@ -12,6 +12,8 @@
 <h:body>
 	<h:form id="clientes-form">
 
+		<p:growl id="growl" showDetail="true" />
+
 		<p:panel header="Registro de clientes">
 			<h:panelGrid columns="2" cellpadding="4">
 				<h:outputText value="RUT*: " />
@@ -27,15 +29,18 @@
 				<h:outputText value="Telefono: " />
 				<p:inputText id="telefono" value="#{clientesView.cliente.telefono}" />
 
-				<p:commandButton value="Reservar" id="reservar"
+				<p:commandButton value="Registrar" id="crear_cliente"
 					update="clientes-form" actionListener="#{clientesView.submit}" />
 
 				<p:commandButton value="Reset" id="reset" update="clientes-form"
-					actionListener="#{formController.reset}" />
+					actionListener="#{clientesView.reset}" />
+
+				<p:commandButton value="Regresar al inicio" id="home"
+					actionListener="#{clientesView.home}" />
 			</h:panelGrid>
 		</p:panel>
 
-		<p:dataTable var="cliente" value="#{clientesView.clientes}">
+		<!-- <p:dataTable var="cliente" value="#{clientesView.clientes}">
 			<p:column headerText="Id">
 				<h:outputText value="#{cliente.id}" />
 			</p:column>
@@ -55,7 +60,7 @@
 			<p:column headerText="Telefono	">
 				<h:outputText value="#{cliente.telefono}" />
 			</p:column>
-		</p:dataTable>
+		</p:dataTable> -->
 	</h:form>
 </h:body>
 </html>

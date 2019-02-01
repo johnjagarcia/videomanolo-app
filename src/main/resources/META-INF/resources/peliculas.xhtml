@@ -67,7 +67,10 @@
 
 			</p:outputPanel>
 
-			<h:commandButton value="Reservar" action="#{peliculasView.reservar}" />
+			<h:commandButton action="#{peliculasView.successs}" value="Reservar">
+				<f:param name="id_pelicula"
+					value="#{peliculasView.selectedPelicula.id}" />
+			</h:commandButton>
 		</p:dialog>
 	</h:form>
 

@@ -10,8 +10,49 @@
 </h:head>
 
 <h:body>
-	<h:form id="form">
-		
+	<h:form id="reserva-form">
+
+		<p:growl id="growl" showDetail="true" />
+
+		<p:panel header="Reservar pelicula">
+			<h:panelGrid columns="2" cellpadding="4">
+				<h:outputText value="Nombre de la pelicula: " />
+				<h:outputText value="#{reservaView.pelicula.titulo}" />
+
+				<h:outputText value="Cantidad disponible: " />
+				<h:outputText value="#{reservaView.pelicula.cantidad}" />
+
+				<h:outputText value="Cliente (Ingrese su RUT): " />
+				<p:inputText id="cliente_rut" value="#{reservaView.cliente.rut}" />
+
+				<p:commandButton value="Reservar" id="reservar"
+					update="reserva-form" actionListener="#{reservaView.reservar}" />
+
+				<p:commandButton action="#{reservaView.toClientes}"
+					value="Registrarse" />
+
+				<p:commandButton action="#{reservaView.home}" value="Ver peliculas" />
+			</h:panelGrid>
+		</p:panel>
+
+
+		<p:dataTable var="reserva" value="#{reservaView.reservas}">
+			<p:column headerText="Id">
+				<h:outputText value="#{reserva.id}" />
+			</p:column>
+
+			<p:column headerText="Fecha registro">
+				<h:outputText value="#{reserva.fechaRegistro}" />
+			</p:column>
+
+			<p:column headerText="Cliente">
+				<h:outputText value="#{reserva.cliente.rut}" />
+			</p:column>
+
+			<p:column headerText="Pelicula">
+				<h:outputText value="#{reserva.pelicula.titulo}" />
+			</p:column>
+		</p:dataTable>
 	</h:form>
 </h:body>
 
