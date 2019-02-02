@@ -51,12 +51,12 @@ public class ClientesView implements Serializable {
 							"Cliente registrado correctamente!."));
 					init();
 
-					try {
+					/*try {
 						FacesContext.getCurrentInstance().getExternalContext()
 								.redirect("peliculas.xhtml?faces-redirect=true");
 					} catch (IOException e) {
 						e.printStackTrace();
-					}
+					}*/
 				}
 			}
 		} else {
@@ -70,9 +70,13 @@ public class ClientesView implements Serializable {
 		init();
 	}
 
-	public String home() {
-		init();
-		return "peliculas.xhtml?faces-redirect=true";
+	public void home() {
+		try {
+			FacesContext.getCurrentInstance().getExternalContext()
+					.redirect("peliculas.xhtml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public List<Cliente> getClientes() {
